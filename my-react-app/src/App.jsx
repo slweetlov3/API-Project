@@ -1,15 +1,17 @@
-import './App.css'
+
 import Popular from './Components/Popular';
+import GlobalStyle from './Globalstyle';
+import { useGlobalContext } from './context/global';
+
 
 function App() {
- return(
+  return(
+    
     <div className="App">
-      <header className="App-header">
-        <input type="text" name="" id="" />
-        <Popular/>
-      </header>
+      <Popular />
     </div>
   );
+  
 }
 
 export default App
