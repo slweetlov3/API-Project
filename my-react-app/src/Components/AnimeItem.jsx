@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import  styled  from 'styled-components';
 
 function AnimeItem() {
@@ -31,6 +31,7 @@ function AnimeItem() {
         const response = await fetch(`${baseUrl}/anime/${animeID}/characters`);
         const data = await response.json();
         setCharacters(data.data);
+        console.log(data.data);
     }
     
 
@@ -77,6 +78,20 @@ function AnimeItem() {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
               ></iframe>}
+        </div>
+        <h3 className="title">Characters</h3>
+        <div className="characters">
+            {characters?.map((character1, index) => {
+                const {role} = character1;
+                const {images, name, mal_id} = character1.character;
+                return <Link to={`/character/${mal_id}`} key={index}>
+                <div className="character">
+                    <img src={images?.jpg.image_url} alt="" />
+                    <h4>{name}</h4>
+                    <p>{role}</p>
+                </div>
+                </Link>
+            })}
         </div>
 
     </AnimeItemStyled>
@@ -157,6 +172,18 @@ const AnimeItemStyled = styled.div`
             padding: 1.5rem;
             border-radius: 10px;
             background-color: #FFFFFF;
+        }
+    }
+    .characters{
+        background-color: #fff;
+        border-radius: 20px;
+        padding: 2rem;
+        border: 5px solid #e5e7eb;
+        display: grid;
+        grid-template-columns: repeat(10, 1fr);
+        img{
+            border-radius: 7px;
+            width: 300px;
         }
     }
 `;
