@@ -109,7 +109,7 @@ const AnimeItemStyled = styled.div`
         background: linear-gradient( to right, #a855f7, #27AE60);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-        trasition: all .4s ease-in-out;
+        transition: all .4s ease-in-out;
         &:hover{
             transform: skew(-3deg);
         }
@@ -180,10 +180,23 @@ const AnimeItemStyled = styled.div`
         padding: 2rem;
         border: 5px solid #e5e7eb;
         display: grid;
-        grid-template-columns: repeat(10, 1fr);
-        img{
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-gap: 2rem;
+        .character{
+            padding: .4rem .6rem;
             border-radius: 7px;
-            width: 300px;
+            background-color: #EDEDED;
+            transition: all .4s ease-in-out;
+            img{
+            width: 100%;
+        }
+            h4{
+                padding: .5rem 0;
+                color: #454e56;
+            }
+            p{
+                color: #6c7983;
+            }
         }
     }
 `;
