@@ -2,12 +2,12 @@ import React from 'react'
 import { useGlobalContext } from '../context/global';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-function Popular() {
-  const {popularAnime, isSearch} = useGlobalContext();
+function Airing() {
+  const {airingAnime, isSearch} = useGlobalContext();
 
   const conditionalRender = () => {
     if(!isSearch){
-      return popularAnime.map((anime) => {
+      return airingAnime.map((anime) => {
         console.log(anime);
         return <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
             <img src={anime.images.jpg.large_image_url} alt="" />
@@ -17,15 +17,15 @@ function Popular() {
       
   }
   return (
-    <PopularStyled>
+    <AiringStyled>
         <div className="popular-anime">
           {conditionalRender()}
         </div>
-      </PopularStyled>
+      </AiringStyled>
   )
 };
 
-const PopularStyled = styled.div`
+const AiringStyled = styled.div`
   display: flex;
   .popular-anime{
     margin-top: 2rem;
@@ -55,4 +55,4 @@ const PopularStyled = styled.div`
 `;
 
 
-export default Popular;
+export default Airing;

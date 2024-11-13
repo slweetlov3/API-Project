@@ -86,7 +86,7 @@ function AnimeItem() {
                 const {images, name, mal_id} = character1.character;
                 return <Link to={`/character/${mal_id}`} key={index}>
                 <div className="character">
-                    <img src={images?.jpg.image_url} alt="" />
+                    <img src={images?.jpg.image_url} alt="AnimeCharacter" />
                     <h4>{name}</h4>
                     <p>{role}</p>
                 </div>
@@ -195,8 +195,11 @@ const AnimeItemStyled = styled.div`
                 color: #454e56;
             }
             p{
-                color: #6c7983;
+                color: #18e8d3;
             }
+            &:hover{
+                transform: translateY(-5px);
+                }
         }
     }
 `;
