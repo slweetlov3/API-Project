@@ -5,6 +5,7 @@ import Popular from './Popular';
 import { styled } from 'styled-components';
 import Airing from './Airing';
 import Upcoming from './Upcoming';
+import { Link } from 'react-router-dom';
 function Homepage() {
 
 
@@ -47,10 +48,11 @@ function Homepage() {
               setRendered('popular');
             }}>Popular</button>
           </div>
-          <form action="" className="seach-form">
+          {/* Note: Can't use render to render the search results anime here for some reasons */}
+          <form action="" className="seach-form" onSubmit={handleSubmit}> 
             <div className="input-control">
               <input type="text" placeholder="Search Anime" value={search} onChange={handleChange} />
-              <button type="submit" onClick={handleSubmit}>Search</button>
+              <button type="submit">Search</button>
             </div>
           </form>
           <div className="filter-btn airing-filter">

@@ -1,4 +1,5 @@
 
+import Airing from './Components/Airing';
 import AnimeCharacter from './Components/AnimeCharacter';
 import AnimeItem from './Components/AnimeItem';
 import Homepage from './Components/Homepage';
@@ -12,6 +13,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Homepage />} />
+        <Route path="/airing" element={<Airing />} />
         <Route path="/anime/:id" element={<AnimeItem />}/>
         {/* <Route path="/character/:id" element={<AnimeCharacter />} /> */}
       </Routes>

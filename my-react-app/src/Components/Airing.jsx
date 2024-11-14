@@ -2,23 +2,27 @@ import React from 'react'
 import { useGlobalContext } from '../context/global';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-function Airing() {
-  const {airingAnime, isSearch} = useGlobalContext();
+function Airing({rendered}) {
+  const {airingAnime, isSearch, sea} = useGlobalContext();
 
   const conditionalRender = () => {
-    if(!isSearch){
+    if(!isSearch && rendered==="airing") {
       return airingAnime.map((anime) => {
-        console.log(anime);
         return <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
             <img src={anime.images.jpg.large_image_url} alt="" />
         </Link>
       })
+    } else {
+      return searchResults.map((anime) => {
+        return <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
+            <img src={anime.images.jpg.large_image_url} alt="" />
+        </Link>});
     }
       
   }
   return (
     <AiringStyled>
-        <div className="popular-anime">
+        <div className="airing-anime">
           {conditionalRender()}
         </div>
       </AiringStyled>
@@ -27,7 +31,7 @@ function Airing() {
 
 const AiringStyled = styled.div`
   display: flex;
-  .popular-anime{
+  .airing-anime{
     margin-top: 2rem;
     padding-top: 2rem;
     padding-bottom:2rem;

@@ -2,23 +2,29 @@ import React from 'react'
 import { useGlobalContext } from '../context/global';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
-function Upcoming() {
-  const {upcomingAnime, isSearch} = useGlobalContext();
+function Upcoming({rendered}) {
+  const {upcomingAnime, isSearch, searchResults} = useGlobalContext();
 
   const conditionalRender = () => {
-    if(!isSearch){
+    if(!isSearch && rendered==="upcoming"){
       return upcomingAnime.map((anime) => {
         console.log(anime);
         return <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
             <img src={anime.images.jpg.large_image_url} alt="" />
         </Link>
       })
+    } else {
+      return searchResults.map((anime) => {
+        console.log(anime);
+        return <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
+            <img src={anime.images.jpg.large_image_url} alt="" />
+        </Link>});
     }
       
   }
   return (
     <UpcomingStyled>
-        <div className="popular-anime">
+        <div className="upcoming-anime">
           {conditionalRender()}
         </div>
       </UpcomingStyled>
@@ -27,7 +33,7 @@ function Upcoming() {
 
 const UpcomingStyled = styled.div`
   display: flex;
-  .popular-anime{
+  .upcoming-anime{
     margin-top: 2rem;
     padding-top: 2rem;
     padding-bottom:2rem;

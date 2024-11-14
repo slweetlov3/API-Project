@@ -46,19 +46,19 @@ export const GlobalContextProvider = ({children}) => {
     const [search,setSearch] = useState("");
 
     
-
+    //Handle the change on the searchbar, with this when we enter nothing, it will automatically back to the page before the search
     const handleChange = (e) => {
         setSearch(e.target.value);
         if (e.target.value==="") {
             state.isSearch = false;
         };
     }
-
+    //Handle search submit event
     const handleSubmit = (e) => {
         e.preventDefault();
         if(search){
             searchAnime(search);
-            state.isSearch =true;
+            state.isSearch = true;
         } else {
             state.isSearch = false;
             alert("Please enter a valid search term");
@@ -91,9 +91,9 @@ export const GlobalContextProvider = ({children}) => {
     // Search Anime
     const searchAnime = async (query) => {
         dispatch({ type: LOADING });
-        const response = await fetch(`${baseUrl}/search/anime?q=${query}&order_by=popurality&sort=asc`);
+        const response = await fetch(`${baseUrl}/anime?q=${query}&sort=asc`);
         const data = await response.json();
-        dispatch({type: SEARCH, payload: data.data.results});
+        dispatch({type: SEARCH, payload: data.data});
     };
 
      //initial render note: khong nen fetch qua nhieu data, no se bi qua tai va viec truyen du lieu se bi sida.
