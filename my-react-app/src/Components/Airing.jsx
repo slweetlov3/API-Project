@@ -3,7 +3,7 @@ import { useGlobalContext } from '../context/global';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
 function Airing({rendered}) {
-  const {airingAnime, isSearch, sea} = useGlobalContext();
+  const {airingAnime, isSearch, searchResults} = useGlobalContext();
 
   const conditionalRender = () => {
     if(!isSearch && rendered==="airing") {

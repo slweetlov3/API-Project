@@ -1,79 +1,101 @@
-import React, { useState } from 'react'
-
+import React, { useState, useEffect } from 'react';
 import { useGlobalContext } from '../context/global';
 import Popular from './Popular';
 import { styled } from 'styled-components';
 import Airing from './Airing';
 import Upcoming from './Upcoming';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+
 function Homepage() {
+  const {
+    handleSubmit,
+    search,
+    searchAnime,
+    handleChange,
+    setSearch,
+    getUpcomingAnime,
+    getAiringAnime,
+    getPopularAnime,
+  } = useGlobalContext();
 
-
-  const {handleSubmit, search,
-     searchAnime, handleChange,
-     setSearch, getUpcomingAnime,
-     getAiringAnime,getPopularAnime,} = useGlobalContext();
-
-
-  
   const [rendered, setRendered] = useState("popular");
-  
-
+  const navigate = useNavigate(); // Sử dụng useNavigate
 
   const switchComponent = () => {
     switch (rendered) {
-        case "popular":
-          return <Popular rendered={rendered}/>
-        case "airing":
-          return <Airing  rendered={rendered}/>
-        case "upcoming":
-          return <Upcoming rendered={rendered}/>
-        default:
-          return <Popular rendered={rendered}/>
+      case "popular":
+        return <Popular rendered={rendered} />;
+      case "airing":
+        return <Airing rendered={rendered} />;
+      case "upcoming":
+        return <Upcoming rendered={rendered} />;
+      default:
+        return <Popular rendered={rendered} />;
     }
-  }
+  };
+  //Handle the navigation, even if you go to the another page, when you go back, the URL still is the one that you left last time (sorry for bad English)
+  //Also it handle the setRendered and,...
+  const handleNavigation = (type) => {
+    setRendered(type);
+    navigate(`/${type}`); // Thay đổi URL
+    if (type === "airing") getAiringAnime();
+    if (type === "upcoming") getUpcomingAnime();
+  };
+
+
+  //This will keep making sure that the contents in the page will match with the URL.
+  const location = useLocation();
+  useEffect(() => {
+    const path = location.pathname.replace("/","");
+    if (path === "popular" || path === "airing" || path == "upcoming") {
+      setRendered(path);
+    };
+    localStorage.setItem("rendered", rendered);
+  }, [location.pathname]);
+
   return (
     <HomepageStyled>
       <header>
         <div className="logo">
           <h1>
-            {rendered === 'popular' ? 'Popular Anime' :
-            rendered === 'airing' ? "Airing Anime": "Upcoming Anime"
-            }
+            {rendered === "popular"
+              ? "Popular Anime"
+              : rendered === "airing"
+              ? "Airing Anime"
+              : "Upcoming Anime"}
           </h1>
         </div>
         <div className="search-container">
           <div className="filter-btn popular-filter">
-            <button onClick={()=> {
-              setRendered('popular');
-            }}>Popular</button>
+            <button onClick={() => handleNavigation("popular")}>Popular</button>
           </div>
           {/* Note: Can't use render to render the search results anime here for some reasons */}
-          <form action="" className="seach-form" onSubmit={handleSubmit}> 
+          <form action="" className="seach-form" onSubmit={handleSubmit}>
             <div className="input-control">
-              <input type="text" placeholder="Search Anime" value={search} onChange={handleChange} />
+              <input
+                type="text"
+                placeholder="Search Anime"
+                value={search}
+                onChange={handleChange}
+              />
               <button type="submit">Search</button>
             </div>
           </form>
           <div className="filter-btn airing-filter">
-            <button onClick={()=> {
-              setRendered('airing');
-              getAiringAnime();
-            }}>Airing</button>
+            <button onClick={() => handleNavigation("airing")}>Airing</button>
           </div>
           <div className="filter-btn upcoming-filter">
-            <button onClick={()=> {
-              setRendered('upcoming');
-              getUpcomingAnime();
-            }}>Upcoming</button>
+            <button onClick={() => handleNavigation("upcoming")}>Upcoming</button>
           </div>
         </div>
       </header>
       {switchComponent()}
     </HomepageStyled>
-    
-  )
+  );
 }
+
+
+
 
 
 const HomepageStyled = styled.div`
