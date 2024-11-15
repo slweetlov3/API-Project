@@ -6,21 +6,29 @@ import Airing from './Airing';
 import Upcoming from './Upcoming';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 
+
 function Homepage() {
+
+  //Fetching states from the globalcontext:
+  //handleSubmit for the
   const {
     handleSubmit,
     search,
-    searchAnime,
     handleChange,
-    setSearch,
     getUpcomingAnime,
     getAiringAnime,
-    getPopularAnime,
   } = useGlobalContext();
 
-  const [rendered, setRendered] = useState("popular");
-  const navigate = useNavigate(); // Sử dụng useNavigate
+  const [rendered, setRendered] = useState(
+    localStorage.getItem("rendered") || "popular"
+  );
+  //Ensure the nagivation
+  const navigate = useNavigate();
+  //Same on the ensure the navigation
+  const location = useLocation();
 
+  //This will make sure that you render the correct page, decide
+  //on the button on the navigation bar
   const switchComponent = () => {
     switch (rendered) {
       case "popular":
@@ -33,7 +41,8 @@ function Homepage() {
         return <Popular rendered={rendered} />;
     }
   };
-  //Handle the navigation, even if you go to the another page, when you go back, the URL still is the one that you left last time (sorry for bad English)
+  //Handle the navigation, even if you go to the another page
+  //when you go back, the URL still is the one that you left last time (sorry for bad English)
   //Also it handle the setRendered and,...
   const handleNavigation = (type) => {
     setRendered(type);
@@ -44,11 +53,11 @@ function Homepage() {
 
 
   //This will keep making sure that the contents in the page will match with the URL.
-  const location = useLocation();
+  //Even if you go straight to some page
   useEffect(() => {
     const path = location.pathname.replace("/","");
     if (path === "popular" || path === "airing" || path == "upcoming") {
-      setRendered(path);
+      handleNavigation(path);
     };
     localStorage.setItem("rendered", rendered);
   }, [location.pathname]);

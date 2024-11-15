@@ -5,18 +5,21 @@ import { styled } from 'styled-components';
 function Upcoming({rendered}) {
   const {upcomingAnime, isSearch, searchResults} = useGlobalContext();
 
+  //Rendering base on the condition:
+  //If is seaching then dislay the searching anime
+  //else display the Upcomings
   const conditionalRender = () => {
     if(!isSearch && rendered==="upcoming"){
-      return upcomingAnime.map((anime) => {
+      return upcomingAnime.map((anime, count) => {
         console.log(anime);
-        return <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
+        return <Link to={`/anime/${anime.mal_id}`} key={count}>
             <img src={anime.images.jpg.large_image_url} alt="" />
         </Link>
       })
     } else {
-      return searchResults.map((anime) => {
+      return searchResults.map((anime,count) => {
         console.log(anime);
-        return <Link to={`/anime/${anime.mal_id}`} key={anime.mal_id}>
+        return <Link to={`/anime/${anime.mal_id}`} key={count}>
             <img src={anime.images.jpg.large_image_url} alt="" />
         </Link>});
     }
