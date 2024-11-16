@@ -10,6 +10,7 @@ const SEARCH = "SEARCH";
 const GET_POPULAR_ANIME = "GET_POPULAR_ANIME";
 const GET_UPCOMING_ANIME = "GET_UPCOMING_ANIME";
 const GET_AIRING_ANIME = "GET_AIRING_ANIME";
+const GET_ANIME_PICTURES = "GET_ANIME_PICTURES";
 
 //reducer
 const reducer = (state, action) => {
@@ -24,6 +25,8 @@ const reducer = (state, action) => {
             return {...state, loading:false, airingAnime: action.payload};
         case SEARCH:
             return {...state, loading:false, searchResults: action.payload};
+        case GET_ANIME_PICTURES:
+            return {...state, loading: false, pictures: action.payload};
         default:
             return state;
         };
@@ -95,6 +98,15 @@ export const GlobalContextProvider = ({children}) => {
         const data = await response.json();
         dispatch({type: SEARCH, payload: data.data});
     };
+    
+    //Get Character Pictures
+    const getAnimePictures = async (charID) => {
+        dispatch({ type: LOADING});
+        const response = await fetch(`${baseUrl}/characters/${charID}/pictures`);
+        const data = await response.json();
+        console.log(data);
+        dispatch({type: GET_ANIME_PICTURES, payload: data.data});
+    }
 
      //initial render note: khong nen fetch qua nhieu data, no se bi qua tai va viec truyen du lieu se bi sida.
         useEffect(() => {
@@ -111,7 +123,8 @@ export const GlobalContextProvider = ({children}) => {
             search,
             getAiringAnime,
             getPopularAnime,
-            getUpcomingAnime 
+            getUpcomingAnime,
+            getAnimePictures 
         }}>
             {children}
         </GlobalContext.Provider>

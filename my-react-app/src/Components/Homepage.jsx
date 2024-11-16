@@ -4,8 +4,8 @@ import Popular from './Popular';
 import { styled } from 'styled-components';
 import Airing from './Airing';
 import Upcoming from './Upcoming';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-
+import { useNavigate, useLocation } from 'react-router-dom';
+import Sidebar from './Sidebar';
 
 function Homepage() {
 
@@ -98,7 +98,10 @@ function Homepage() {
           </div>
         </div>
       </header>
+      <div class="main-content">
       {switchComponent()}
+      </div>
+      
     </HomepageStyled>
   );
 }

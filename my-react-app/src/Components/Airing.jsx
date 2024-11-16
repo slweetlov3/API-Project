@@ -2,6 +2,7 @@ import React from 'react'
 import { useGlobalContext } from '../context/global';
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
+import Sidebar from './Sidebar';
 function Airing({rendered}) {
   const {airingAnime, isSearch, searchResults} = useGlobalContext();
   //Rendering base on the condition:
@@ -27,6 +28,7 @@ function Airing({rendered}) {
         <div className="airing-anime">
           {conditionalRender()}
         </div>
+        <Sidebar rendered={rendered}/>
       </AiringStyled>
   )
 };
