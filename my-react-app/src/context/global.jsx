@@ -104,11 +104,10 @@ export const GlobalContextProvider = ({children}) => {
         dispatch({ type: LOADING});
         const response = await fetch(`${baseUrl}/characters/${charID}/pictures`);
         const data = await response.json();
-        console.log(data);
         dispatch({type: GET_ANIME_PICTURES, payload: data.data});
     }
 
-     //initial render note: khong nen fetch qua nhieu data, no se bi qua tai va viec truyen du lieu se bi sida.
+     //initial render note: Shouldn't fetch too much data at
         useEffect(() => {
                     getPopularAnime();
                 }, []);

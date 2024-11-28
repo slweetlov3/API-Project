@@ -7,19 +7,17 @@ function Upcoming({rendered}) {
   const {upcomingAnime, isSearch, searchResults} = useGlobalContext();
 
   //Rendering base on the condition:
-  //If is seaching then dislay the searching anime
-  //else display the Upcomings
+  //If is searching then display the searching anime
+  //else display the Up0comings
   const conditionalRender = () => {
     if(!isSearch && rendered==="upcoming"){
       return upcomingAnime.map((anime, count) => {
-        console.log(anime);
         return <Link to={`/anime/${anime.mal_id}`} key={count}>
             <img src={anime.images.jpg.large_image_url} alt="" />
         </Link>
       })
     } else {
       return searchResults.map((anime,count) => {
-        console.log(anime);
         return <Link to={`/anime/${anime.mal_id}`} key={count}>
             <img src={anime.images.jpg.large_image_url} alt="" />
         </Link>});
@@ -40,10 +38,7 @@ const UpcomingStyled = styled.div`
   display: flex;
   .upcoming-anime{
     margin-top: 2rem;
-    padding-top: 2rem;
-    padding-bottom:2rem;
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
+    padding: 2rem 2.5rem 2rem 2.5rem;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));

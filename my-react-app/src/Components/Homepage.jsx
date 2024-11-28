@@ -98,7 +98,7 @@ function Homepage() {
           </div>
         </div>
       </header>
-      <div class="main-content">
+      <div className="main-content">
       {switchComponent()}
       </div>
       

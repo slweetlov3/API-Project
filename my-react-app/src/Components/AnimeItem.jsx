@@ -15,7 +15,7 @@ function AnimeItem() {
     const {title, synopsis, trailer,
     duration, aired, season,
     images, rank, score,
-    scored_by, popurality,
+    scored_by, popularity,
     status, rating, source} = anime;
 
 
@@ -53,7 +53,7 @@ function AnimeItem() {
                     <p><span>Rank:</span><span>{rank}</span></p>
                     <p><span>Score:</span><span>{score}</span></p>
                     <p><span>Scored By:</span><span>{scored_by}</span></p>
-                    <p><span>Popularity:</span><span>{popurality}</span></p>
+                    <p><span>Popularity:</span><span>{popularity}</span></p>
                     <p><span>Status:</span><span>{status}</span></p>
                     <p><span>Source:</span><span>{source}</span></p>
                     <p><span>Season:</span><span>{season}</span></p>
@@ -108,6 +108,7 @@ const AnimeItemStyled = styled.div`
         cursor: pointer;
         background: linear-gradient( to right, #a855f7, #27AE60);
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
         transition: all .4s ease-in-out;
         &:hover{
@@ -121,6 +122,7 @@ const AnimeItemStyled = styled.div`
         cursor: pointer;
         background: linear-gradient( to right, #a855f7, #27AE60);
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
     }
     .description{

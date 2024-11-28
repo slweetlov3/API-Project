@@ -6,7 +6,7 @@ import Sidebar from './Sidebar';
 function Airing({rendered}) {
   const {airingAnime, isSearch, searchResults} = useGlobalContext();
   //Rendering base on the condition:
-  //If is seaching then dislay the searching anime
+  //If is searching then display the searching anime
   //else display the Airing
   const conditionalRender = () => {
     if(!isSearch && rendered==="airing") {
@@ -37,10 +37,7 @@ const AiringStyled = styled.div`
   display: flex;
   .airing-anime{
     margin-top: 2rem;
-    padding-top: 2rem;
-    padding-bottom:2rem;
-    padding-left: 2.5rem;
-    padding-right: 2.5rem;
+    padding: 2rem 2.5rem 2rem 2.5rem;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
